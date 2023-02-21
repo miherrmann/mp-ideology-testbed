@@ -1,31 +1,7 @@
-## Test estimation strategy
-
-## Recovering n_mp shift and stretch parameters: a, b
-
-## Simulated data sets
-## 1. data_complete.csv: each MP rates all parties
-## 2. data_design.csv: each MP rates own party and PM party
-##    (resp. 2nd largest party if own party is PM party)
-## 3. data_random.csv: each MP rates n_obs randomly selected
-##    parties
-
-## Estimation strategies
-## 1. No pooling: independent OLS regressions 
-## 2. Partial pooling/shrinkage: REML hierarchical linear   
-##    random effects regression
-## 3. TBA: Bayesian hierarchical linear random effects 
-##    regression
-
-## Output
-## 1. model-comparison.pdf
-##    - solid: true regression line
-##    - dotted: no pooling
-##    - dashed: partial pooling/shrinkage
-##    - red: PM party
-##    - black: own party
-## 2. mae (R object): mean absolute error of estimated shift
-##    and stretch parameters
-
+## Pre-analysis simulation and assessment
+## 1. Generate simulated responses
+## 2. Estimate underlying response parameters
+## 3. Compare parameter estimates to true values
 
 
 library(lme4)
@@ -65,7 +41,7 @@ n_party <- 5
 # obs per MP in random selection design (min: 2; max: n_party)
 n_obs <- 2
 
-# coarsen perceived positions into an 11pt scale
+# coarsen perceived positions into an 11pt scale?
 coarse <- TRUE
 
 # rng seed
