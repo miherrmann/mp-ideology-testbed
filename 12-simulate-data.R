@@ -14,6 +14,8 @@
 ##    - 99.99% of perceived positions should be within +/-4 standard deviations
 ##    => Implemented via rescaling and rounding; then scaling back to [-4, 4]
 ##       so that (coarsened) y is on the same scale as a, b, and e
+##    => Rescaling and rounding are carried out in pool-datasets.R (so that
+##       possible values are the same across all countries)
 
 
 ## Initialize simulation ----
@@ -31,7 +33,6 @@ for (country in names(n$party)) {
 
   n_p <- n$party[country]
 
-
   # True party positions
 
   delta <- 0
@@ -47,35 +48,23 @@ for (country in names(n$party)) {
 
   }
 
-
   # Country-specific deviations: shift and stretch parameters
 
   a_dev <- rnorm(n = 1, mean = 0, sd$a_country)
   b_dev <- rnorm(n = 1, mean = 0, sd$b_country)
-
 
   # MPs' true shift and stretch parameters
 
   a <- rep(rnorm(n$mp, mean$a + a_dev, sd$a), each = n_p)
   b <- rep(rnorm(n$mp, mean$b + b_dev, sd$b), each = n_p)
 
-
   # MPs' perception errors
 
   e <- rnorm(n = n$mp * n_p, sd = sd$e)
 
-
   # MPs' perceived/measured party positions
 
   y <- a + b * x + e
-
-  if (coarse) {
-
-    sd_y <- sd(y)
-    y <- round(y / sd_y * 5/4) * 4/5 * sd_y
-
-  }
-
 
   # Write data set: all observations
 

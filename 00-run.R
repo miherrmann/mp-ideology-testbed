@@ -11,7 +11,7 @@ library(lme4)
 ## Estimation options ----
 
 # data to use in estimation: design, complete, or random
-data <- "complete"
+data <- "design"
 
 
 ## Simulation options ----
@@ -21,7 +21,7 @@ sd_e <- 0.8
 
 # MP hyperparameters: shift
 mean_a <- 0
-sd_a <- 0.05
+sd_a <- 0.1
 
 # MP hyperparameters: stretch
 mean_b <- 1
@@ -31,11 +31,11 @@ sd_b <- 0.4
 sd_a_country <- 0.1
 sd_b_country <- 0.2
 
-# number of MPs (min: 1)
+# number of MPs per country (min: 1)
 n_mp <- 100
 
 # number of parties per country (min: 2)
-n_party <- c(3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8)
+n_party <- c(3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 9)
 
 # obs per MP in random selection design (min: 2; max: n_party)
 n_obs <- 2
@@ -55,26 +55,26 @@ source("11-collect-inputs.R")
 ## Simulate country data sets ----
 
 source("12-simulate-data.R")
-
 source("13-apply-design.R")
-
 source("14-apply-random.R")
 
 
 ## Estimate parameters ----
 
 source("21-pool-datasets.R")
-
 source("22-estimate-parameters.R")
 
 
 ## Evaluate results ----
 
 source("31-plot-predictions.R")
-
 source("32-compute-mae.R")
 
-print(mae)
+
+## Inspect results ----
 
 load("estimation-results.RData")
+load("estimation-evaluation.RData")
+
 summary(m2)
+print(mae)

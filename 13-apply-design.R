@@ -28,14 +28,14 @@ for (country in names(n$party)) {
     as.numeric()
 
 
-  ## Assigning PM and 2nd status ---
+  ## Assign PM and 2nd status ---
 
   med_party <- median(seq_len(n_p))
   pm_2nd <- c(ceiling(med_party), floor(med_party)) + c(-1, 1)
   dt$party[dt$party %in% pm_2nd] <- c("PM", "2nd")
 
 
-  ## Identifying and selecting types ----
+  ## Identify and selecting types ----
 
   prop_type1 <- 4 / (n_p + 2)
 

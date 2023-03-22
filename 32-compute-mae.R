@@ -27,4 +27,6 @@ mae <-
     sapply(\(.m_ab) mean(abs(.m_ab - est_true[[.ab]])))
   )
 
-rm(dt, what, list = ls(pattern = "^est"))
+save(mae, file = "estimation-evaluation.RData")
+
+rm(list = ls())

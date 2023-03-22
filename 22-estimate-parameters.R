@@ -5,7 +5,7 @@
 
 
 # Run no-pooling estimation (very time consuming with n > 1e4)?
-do_m1 <- TRUE
+estimate_m1 <- TRUE
 
 
 ## Initialize estimation ----
@@ -24,7 +24,7 @@ m0 <- lm(perceived ~ true, data = dt)
 
 ## 1. OLS no pooling ----
 
-if (do_m1) {
+if (estimate_m1) {
 
   m1 <- lm(perceived ~ -1 + mp + mp:true, data = dt)
 
@@ -38,7 +38,13 @@ if (do_m1) {
 
 ## 2. REML partial pooling, assuming uncorrelated a and b ----
 
-m2 <- lmer(perceived ~ true + (true || country / mp), data = dt)
+optimizer <- lmerControl(optimizer = "bobyqa")
+
+m2 <- lmer(
+  perceived ~ true + (true || country / mp),
+  data = dt,
+  control = optimizer
+)
 
 est$m2 <- setNames(coef(m2)$"mp:country", nm = ab)
 

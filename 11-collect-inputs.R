@@ -18,4 +18,4 @@ sd <-
 
 save(n, mean, sd, data, coarse, seed, file = "user-inputs.RData")
 
-rm(list = ls(pattern = "mean_|sd_|n_"), data, coarse, seed)
+rm(list = ls())
