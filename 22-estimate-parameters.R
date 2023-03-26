@@ -4,6 +4,9 @@
 ## stretch parameters and store estimation results
 
 
+library(lme4)
+
+
 # Run no-pooling estimation (very time consuming with n > 1e4)?
 estimate_m1 <- TRUE
 
@@ -28,10 +31,14 @@ if (estimate_m1) {
 
   m1 <- lm(perceived ~ -1 + mp + mp:true, data = dt)
 
-  est$m1 <- sapply(
-    setNames(c("", ":true"), nm = ab),
-    \(.ab) as.vector(coef(m1)[paste0("mp", unique(dt$mp), .ab)])
-  )
+  est$m1 <-
+    c("", ":true") |>
+    setNames(nm = ab) |>
+    sapply(
+      \(.ab)
+      coef(m1)[paste0("mp", unique(dt$mp), .ab)] |>
+      as.vector()
+    )
 
 }
 
@@ -46,7 +53,11 @@ m2 <- lmer(
   control = optimizer
 )
 
-est$m2 <- setNames(coef(m2)$"mp:country", nm = ab)
+est$m2_new <-
+  m2 |>
+  coef() |>
+  getElement("mp:country") |>
+  setNames(nm = ab)
 
 
 ## Store results ----
