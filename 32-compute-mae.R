@@ -5,8 +5,12 @@
 
 
 load("user-inputs.RData")
-dt <- read.csv(sprintf("data-%s.csv", data))
+
 est <- read.csv("ab-estimates.csv")
+dt <-
+  "data-%s.csv" |>
+  sprintf(data) |>
+  read.csv()
 
 
 ## Mean absolute error ----

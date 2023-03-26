@@ -16,23 +16,26 @@ data <- "design"
 
 ## Simulation options ----
 
-# MP perception error
-sd_e <- 0.8
+# perception error
+sd_e <- 0.5
 
-# MP hyperparameters: shift
+# hyperparameters: shift
 mean_a <- 0
 sd_a <- 0.1
 
-# MP hyperparameters: stretch
+# hyperparameters: stretch
 mean_b <- 1
-sd_b <- 0.4
+sd_b <- 0.3
 
 # cross-country variation in hyperparameters
 sd_a_country <- 0.1
 sd_b_country <- 0.2
 
-# number of MPs per country (min: 1)
+# number of MPs (min: 1)
 n_mp <- 100
+
+# number of citizens (min: 1)
+n_citizen <- 1000
 
 # number of parties per country (min: 2)
 n_party <- c(3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 9)

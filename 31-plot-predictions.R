@@ -8,25 +8,16 @@
 
 
 load("user-inputs.RData")
-dt <- read.csv(sprintf("data-%s.csv", data))
-est <- read.csv("ab-estimates.csv")
 
 
 ## Make plot inputs ----
 
-dt_est <- merge(dt, est, by = "mp", all.y = TRUE)
-
-select <- c(  # probably not necessary -- consider deleting
-  "mp",
-  "party",
-  "true",
-  "perceived",
-  grep(pattern = "shift|stretch", names(dt_est), value = TRUE)
+dt_est <- merge(
+  x = read.csv(sprintf(fmt = "data-%s.csv", data)),
+  y = read.csv("ab-estimates.csv"),
+  by = "mp",
+  all.y = TRUE
 )
-dt_mp <-
-  dt_est$mp |>
-  unique() |>
-  lapply(\(.mp) dt_est[dt_est$mp == .mp, select])
 
 x_range <- range(dt_est$true)
 y_range <- range(dt_est$perceived)
@@ -37,7 +28,8 @@ y_range <- range(dt_est$perceived)
 pdf("model-comparison.pdf", width = 10, height = 20)
 par(mfrow = c(10, 5))
 
-dt_mp |>
+dt_est |>
+split(f = ~ mp) |>
 lapply(
   \(.mp) {
     plot(

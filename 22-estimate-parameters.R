@@ -13,11 +13,15 @@ estimate_m1 <- TRUE
 
 ## Initialize estimation ----
 
+load("user-inputs.RData")
+
+dt <-
+  "data-%s.csv" |>
+  sprintf(data) |>
+  read.csv()
+
 ab <- c("shift", "stretch")
 est <- list()
-
-load("user-inputs.RData")
-dt <- read.csv(sprintf("data-%s.csv", data))
 
 
 ## 0. OLS complete pooling (reference only: no estimation of MP parameters) ----
@@ -53,7 +57,7 @@ m2 <- lmer(
   control = optimizer
 )
 
-est$m2_new <-
+est$m2 <-
   m2 |>
   coef() |>
   getElement("mp:country") |>
@@ -63,13 +67,12 @@ est$m2_new <-
 ## Store results ----
 
 ab_estimates <- data.frame(mp = unique(dt$mp), lapply(est, data.frame))
-names(ab_estimates) <- gsub(
-  pattern = "\\.",
-  replacement = "_",
-  names(ab_estimates)
-)
 
-write.csv(ab_estimates, file = "ab-estimates.csv", row.names = FALSE)
-save(list = paste0("m", 0:2), file = "estimation-results.RData")
+ab_estimates |>
+setNames(nm = gsub(pattern = "\\.", replacement = "_", names(ab_estimates))) |>
+write.csv(file = "ab-estimates.csv", row.names = FALSE)
+
+paste0("m", 0:2) |>
+save(list = _, file = "estimation-results.RData")
 
 rm(list = ls())

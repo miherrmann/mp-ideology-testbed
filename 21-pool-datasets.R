@@ -1,4 +1,5 @@
 ## Pool/append all country data sets and write results
+## Coarsen outcome variable to integer values (if necessary)
 
 
 load("user-inputs.RData")

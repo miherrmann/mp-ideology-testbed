@@ -9,7 +9,10 @@ for (country in names(n$party)) {
 
   n_p <- n$party[country]
 
-  dt <- read.csv(sprintf(fmt = "data-complete/%s.csv", country))
+  dt <-
+    "data-complete/%s.csv" |>
+    sprintf(country) |>
+    read.csv()
 
   random_select <-
     c(TRUE, FALSE) |>
@@ -21,11 +24,9 @@ for (country in names(n$party)) {
 
   data_random <- dt[random_select, ]
 
-  write.csv(
-    data_random,
-    file = sprintf(fmt = "data-random/%s.csv", country),
-    row.names = FALSE
-  )
+  "data-random/%s.csv" |>
+  sprintf(country) |>
+  write.csv(data_random, file = _, row.names = FALSE)
 
 }
 

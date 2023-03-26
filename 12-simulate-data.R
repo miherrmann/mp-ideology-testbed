@@ -78,15 +78,12 @@ for (country in names(n$party)) {
     stretch = b,
     shift_country = a_dev,
     stretch_country = b_dev
-  )
+  ) |>
+  transform(mp = paste(mp, country, sep = "_"))
 
-  data_complete$mp <- with(data_complete, paste(mp, country, sep = "_"))
-
-  write.csv(
-    data_complete,
-    file = sprintf(fmt = "data-complete/%s.csv", country),
-    row.names = FALSE
-  )
+  "data-complete/%s.csv" |>
+  sprintf(country) |>
+  write.csv(data_complete, file = _, row.names = FALSE)
 
 }
 

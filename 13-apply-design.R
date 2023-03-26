@@ -22,11 +22,13 @@ for (country in names(n$party)) {
 
   ## Read data and create numeric mp id ----
 
-  dt <- read.csv(sprintf("data-complete/%s.csv", country))
-  dt$mp_num <-
-    gsub(pattern = "_[[:alpha:]]", replacement = "", dt$mp) |>
-    as.numeric()
-
+  dt <-
+    "data-complete/%s.csv" |>
+    sprintf(country) |>
+    read.csv() |>
+    transform(
+      mp_num = as.numeric(gsub(pattern = "_[[:alpha:]]", replacement = "", mp))
+    )
 
   ## Assign PM and 2nd status ---
 
@@ -35,7 +37,7 @@ for (country in names(n$party)) {
   dt$party[dt$party %in% pm_2nd] <- c("PM", "2nd")
 
 
-  ## Identify and selecting types ----
+  ## Identify and select types ----
 
   prop_type1 <- 4 / (n_p + 2)
 
@@ -44,14 +46,18 @@ for (country in names(n$party)) {
   n$other <- n_p - 2
 
   type1 <- seq_len(n$type1)
-  dt_type1 <- dt[dt$mp_num %in% type1 & dt$party %in% c("PM", "2nd"), ]
+  dt_type1 <- 
+    dt |>
+    subset(subset = mp_num %in% type1 & party %in% c("PM", "2nd"))
 
   data_design <- dt_type1
 
   if (n$type2 > 0) {
 
     type2 <- seq(from = n$type1 + 1, to = n$mp)
-    dt_type2_pm_obs <- dt[dt$mp_num %in% type2 & dt$party == "PM", ]
+    dt_type2_pm_obs <- 
+      dt |>
+      subset(subset = mp_num %in% type2 & party == "PM")
 
     data_design <- rbind(data_design, dt_type2_pm_obs)
 
@@ -60,7 +66,8 @@ for (country in names(n$party)) {
   if (n$other > 0) {
 
     dt_type2_other_obs <-
-      dt[dt$mp_num %in% type2 & ! dt$party %in% c("PM", "2nd"), ]
+      dt |>
+      subset(subset = mp_num %in% type2 & ! party %in% c("PM", "2nd"))
 
     # sampling other parties at random
     random_select <-
@@ -75,11 +82,12 @@ for (country in names(n$party)) {
 
   }
 
-  write.csv(
-    data_design,
-    file = sprintf(fmt = "data-design/%s.csv", country),
-    row.names = FALSE
-  )
+
+  ## Write data set ----
+
+  "data-design/%s.csv" |>
+  sprintf(country) |>
+  write.csv(data_design, file = _, row.names = FALSE)
 
 }
 
