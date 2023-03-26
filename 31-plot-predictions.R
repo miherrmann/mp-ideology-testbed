@@ -37,30 +37,29 @@ y_range <- range(dt_est$perceived)
 pdf("model-comparison.pdf", width = 10, height = 20)
 par(mfrow = c(10, 5))
 
-invisible(
-  lapply(
-    dt_mp,
-    \(.mp) {
-      plot(
-        x_range,
-        y_range,
-        type = "n",
-        main = unique(.mp$mp),
-        xlab = "true",
-        ylab = "perceived"
-      )
-      points(
-        x = .mp$true,
-        y = .mp$perceived,
-        pch = 16,
-        col = ifelse(.mp$party == "PM", "red", "black")
-      )
-      abline(coef = unique(.mp[, c("shift", "stretch")]))
-      abline(coef = unique(.mp[, c("m1_shift", "m1_stretch")]), lty = 3)
-      abline(coef = unique(.mp[, c("m2_shift", "m2_stretch")]), lty = 2)
-    }
-  )
-)
+dt_mp |>
+lapply(
+  \(.mp) {
+    plot(
+      x_range,
+      y_range,
+      type = "n",
+      main = unique(.mp$mp),
+      xlab = "true",
+      ylab = "perceived"
+    )
+    points(
+      x = .mp$true,
+      y = .mp$perceived,
+      pch = 16,
+      col = ifelse(.mp$party == "PM", "red", "black")
+    )
+    abline(coef = unique(.mp[, c("shift", "stretch")]))
+    abline(coef = unique(.mp[, c("m1_shift", "m1_stretch")]), lty = 3)
+    abline(coef = unique(.mp[, c("m2_shift", "m2_stretch")]), lty = 2)
+  }
+) |>
+invisible()
 
 dev.off()
 
