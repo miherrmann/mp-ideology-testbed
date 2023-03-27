@@ -27,7 +27,10 @@ for (country in names(n$party)) {
     sprintf(country) |>
     read.csv() |>
     transform(
-      mp_num = as.numeric(gsub(pattern = "_[[:alpha:]]", replacement = "", mp))
+      mp_num =
+        mp |>
+        gsub(pattern = "_[[:alpha:]]", replacement = "", x = _) |>
+        as.numeric()
     )
 
   ## Assign PM and 2nd status ---
@@ -46,7 +49,7 @@ for (country in names(n$party)) {
   n$other <- n_p - 2
 
   type1 <- seq_len(n$type1)
-  dt_type1 <- 
+  dt_type1 <-
     dt |>
     subset(subset = mp_num %in% type1 & party %in% c("PM", "2nd"))
 

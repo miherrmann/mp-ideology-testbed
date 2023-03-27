@@ -17,7 +17,7 @@ dt <-
 
 est_true <-
   est |>
-  merge(dt[c("mp", "shift", "stretch")], by = "mp", all.y = TRUE) |>
+  merge(y = dt[c("mp", "shift", "stretch")], by = "mp", all.y = TRUE) |>
   unique()
 
 what <- c("no_pooling", "partial_pooling")
