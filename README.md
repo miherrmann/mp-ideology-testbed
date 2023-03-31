@@ -22,5 +22,3 @@ Assessment:
    * red dot: PM party
    * black dot: own party
 2. ```mae``` mean absolute errors of estimated shift and stretch parameters
-
-![](model-comparison.pdf)
