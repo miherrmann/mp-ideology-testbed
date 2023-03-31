@@ -1,4 +1,4 @@
-# Assessing approaches for estimating individual scale-perception differences in reported party placements
+# Assessing approaches for estimating individual differences (differential item functioning) in reported party placements
 
 Recover ```n_mp``` shift and stretch parameters (```a```, ```b```) per country from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
 
@@ -22,3 +22,5 @@ Assessment:
    * red dot: PM party
    * black dot: own party
 2. ```mae``` mean absolute errors of estimated shift and stretch parameters
+
+![]()
