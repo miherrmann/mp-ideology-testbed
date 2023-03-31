@@ -1,6 +1,6 @@
 # Assessing approaches for estimating individual scale-perception differences in reported party placements
 
-Recover ```n_mp``` shift and stretch parameters (```a```, ```b```) from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
+Recover ```n_mp``` shift and stretch parameters (```a```, ```b```) per country from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
 
 The motivating use case for this exercise is the first simulation scenario below, where only two responses per individual (MP) are observed. The remaining scenarios are included for comparison:
 
@@ -10,8 +10,8 @@ The motivating use case for this exercise is the first simulation scenario below
 
 Estimators used for recovering individual response parameters:
 
-1. No shrinkage (no pooling): ```n_mp``` independent OLS regressions 
-2. Shrinkage (partial pooling): REML hierarchical linear random effects regression
+1. No shrinkage (no pooling): independent OLS regressions for each MP in each country
+2. Shrinkage (partial pooling): Two-level REML hierarchical linear mixed effects regression with shift and stretch parameters varying across countries and across MPs within countries
 
 Assessment:
 
