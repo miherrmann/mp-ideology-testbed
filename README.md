@@ -1,8 +1,10 @@
-# Assessing approaches for estimating individual scale-perception differences in reported party placements
+# Assessing approaches for estimating individual differences in reported party placements
 
-Recover ```n_mp``` shift and stretch parameters (```a```, ```b```) from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
+Jointly with [Christian Breunig](https://www.polver.uni-konstanz.de/breunig/team/breunig/)
 
-The motivating use case for this exercise is the first simulation scenario below, where only two responses per individual (MP) are observed. The remaining scenarios are included for comparison:
+Recover ```n_mp``` shift and stretch parameters (i.e. differential item functioning) from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
+
+The motivating use case for this exercise is the first simulation scenario below, where only two responses per individual are observed. The remaining scenarios are included for comparison:
 
 * [data_design.csv](data_design.csv): each MP rates own party and PM party (if own party is PM party: 2nd largest party)
 * [data_complete.csv](data_complete.csv): each MP rates all parties
