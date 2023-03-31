@@ -51,8 +51,8 @@ seed <- 123456
 ## Housekeeping: streamline and save user inputs ----
 
 n <- list(
-  mp = max(1, n_mp), 
-  party = max(2, n_party), 
+  mp = max(1, n_mp),
+  party = max(2, n_party),
   obs = min(max(2, n_obs), n_party)
 )
 mean <- setNames(mget(ls(pattern = "mean_")), nm = c("a", "b"))
