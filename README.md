@@ -1,6 +1,6 @@
-# Assessing approaches for estimating individual differences (differential item functioning) in reported party placements
+# Assessing approaches for estimating individual differences in reported party placements
 
-Recover ```n_mp``` shift and stretch parameters (```a```, ```b```) per country from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
+Recover ```n_mp``` shift and stretch parameters (i.e. differential item functioning) per country from simulated responses (i.e., left-right placements of own party and one or more other parties on an 11pt left-right scale) using shrinkage vs. no shrinkage estimators. 
 
 The motivating use case for this exercise is the first simulation scenario below, where only two responses per individual (MP) are observed. The remaining scenarios are included for comparison:
 
