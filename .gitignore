@@ -1,4 +1,8 @@
+# folders
 archive/
-README.html
+
+# files
 .gitignore
-.Rproj.user
+*.Rproj
+*.RData
+*.html
